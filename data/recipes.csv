@@ -1,0 +1,349 @@
+RecipeCode,Recipe,Servings,PrepTimeMins,CookTimeMins,Ingredient,Location,Units,Quantity,Sub Group
+XX001,Dummy1,4,30,60,Almonds,Zero-waste,g,1.0,0
+XX001,Dummy1,4,30,60,Almond Butter,Carrefour,g,1.0,0
+XX001,Dummy1,4,30,60,Bacon,Carrefour,g,1.0,0
+XX002,Dummy2,6,15,60,Almonds,Zero-waste,g,1.0,0
+EG060,Big Bean Salad,6,15,60,Green Beans,Market,g,300.0,0
+EG060,Big Bean Salad,6,15,60,Radishes,Market,handful,1.0,1
+EG060,Big Bean Salad,6,15,60,Corn (Canned),Carrefour,handful,2.0,1
+EG060,Big Bean Salad,6,15,60,Frozen Peas,Carrefour,handful,2.0,1
+EG060,Big Bean Salad,6,15,60,Butterbeans,Carrefour,g,1200.0,2
+EG060,Big Bean Salad,6,15,60,Capsicum (Red),Market,medium,1.0,0
+EG060,Big Bean Salad,6,15,60,Coriander,Market,handful,2.0,0
+EG060,Big Bean Salad,6,15,60,Cashew Nuts,Zero-waste,handful,1.0,0
+EG060,Big Bean Salad,6,15,60,Chili (Green),Market,small,2.0,0
+EG060,Big Bean Salad,6,15,60,Lime,Market,medium,3.0,0
+EG060,Big Bean Salad,6,15,60,Garlic,Market,medium,2.0,0
+EG060,Big Bean Salad,6,15,60,Onion (Red),Market,medium,1.0,0
+HH176,Moroccan Chicken Stew,4,15,30,Almonds,Zero-waste,handful,1.0,0
+HH176,Moroccan Chicken Stew,4,15,30,Onion (Red),Market,medium,2.0,0
+HH176,Moroccan Chicken Stew,4,15,30,Garlic,Market,medium,4.0,0
+HH176,Moroccan Chicken Stew,4,15,30,Ginger,Market,g,40.0,0
+HH176,Moroccan Chicken Stew,4,15,30,Chicken (Thigh),Carrefour,medium,4.0,0
+HH176,Moroccan Chicken Stew,4,15,30,Capsicum (Red),Market,medium,2.0,0
+HH176,Moroccan Chicken Stew,4,15,30,Lemon,Market,large,1.0,0
+HH176,Moroccan Chicken Stew,4,15,30,"Olives (Black, Pitted)",Carrefour,handful,1.0,0
+HH176,Moroccan Chicken Stew,4,15,30,Dried Apricots,Online,medium,4.0,0
+HH176,Moroccan Chicken Stew,4,15,30,Green Beans,Market,g,150.0,0
+HH176,Moroccan Chicken Stew,4,15,30,Coriander,Market,handful,1.0,0
+EG126,Tomato & Bean Bake,6,30,60,Butterbeans,Carrefour,g,1200.0,0
+EG126,Tomato & Bean Bake,6,30,60,Onion (Red),Market,large,2.0,0
+EG126,Tomato & Bean Bake,6,30,60,Garlic,Market,medium,5.0,0
+EG126,Tomato & Bean Bake,6,30,60,Parsley,Market,handful,2.0,0
+EG126,Tomato & Bean Bake,6,30,60,Tomato Puree,Carrefour,tbsp,2.0,0
+EG126,Tomato & Bean Bake,6,30,60,"Tomato (Diced, Tin)",Carrefour,g,800.0,1
+EG126,Tomato & Bean Bake,6,30,60,Tomatoes,Market,g,800.0,1
+EG126,Tomato & Bean Bake,6,30,60,Green Beans,Market,g,600.0,0
+EG126,Tomato & Bean Bake,6,30,60,Lemon,Market,medium,0.5,0
+EG126,Tomato & Bean Bake,6,30,60,Feta Cheese,Carrefour,g,400.0,0
+EG126,Tomato & Bean Bake,6,30,60,Pine Nuts,Zero-waste,handful,1.0,2
+EG126,Tomato & Bean Bake,6,30,60,Walnuts,Zero-waste,handful,1.0,2
+GG144,Chicken & Olive Salad,2,15,0,Chicken (Breast),Carrefour,medium,2.0,0
+GG144,Chicken & Olive Salad,2,15,0,Garlic,Market,large,1.0,0
+GG144,Chicken & Olive Salad,2,15,0,Lemon,Market,medium,1.0,0
+GG144,Chicken & Olive Salad,2,15,0,Yogurt,Carrefour,tbsp,4.0,0
+GG144,Chicken & Olive Salad,2,15,0,Lettuce,Market,medium,1.0,0
+GG144,Chicken & Olive Salad,2,15,0,"Olives (Black, Pitted)",Carrefour,medium,10.0,0
+GG144,Chicken & Olive Salad,2,15,0,Pine Nuts,Zero-waste,handful,2.0,0
+HH204,Quinoa Risotto,4,25,45,Onion (Red),Market,medium,2.0,1
+HH204,Quinoa Risotto,4,25,45,Leeks,Carrefour,medium,2.0,1
+HH204,Quinoa Risotto,4,25,45,Garlic,Market,medium,3.0,0
+HH204,Quinoa Risotto,4,25,45,Quinoa,Zero-waste,g,250.0,0
+HH204,Quinoa Risotto,4,25,45,Asparagus,Market,g,700.0,0
+HH204,Quinoa Risotto,4,25,45,Frozen Peas,Carrefour,handful,2.0,0
+HH204,Quinoa Risotto,4,25,45,Lemon Juice,Market,tbsp,1.0,0
+HH204,Quinoa Risotto,4,25,45,Parsley,Market,g,30.0,0
+HH204,Quinoa Risotto,4,25,45,Mint,Market,g,10.0,0
+HH200,Buckwheat Noodle Salad,3,20,35,Onion (Red),Market,small,1.0,0
+HH200,Buckwheat Noodle Salad,3,20,35,Garlic,Market,medium,1.0,0
+HH200,Buckwheat Noodle Salad,3,20,35,Noodles (Buckwheat),Carrefour,g,170.0,0
+HH200,Buckwheat Noodle Salad,3,20,35,Carrots,Market,medium,2.0,0
+HH200,Buckwheat Noodle Salad,3,20,35,Cabbage,Market,handful,1.0,0
+HH200,Buckwheat Noodle Salad,3,20,35,Broccoli,Market,medium,1.0,1
+HH200,Buckwheat Noodle Salad,3,20,35,Fennel,Carrefour,medium,1.0,1
+HH200,Buckwheat Noodle Salad,3,20,35,Radishes,Market,handful,1.0,1
+HH198,Roasted Vegetable Pesto,4,30,60,Carrots,Market,large,4.0,0
+HH198,Roasted Vegetable Pesto,4,30,60,Capsicum (Red),Market,large,1.0,0
+HH198,Roasted Vegetable Pesto,4,30,60,Tomatoes,Market,large,4.0,1
+HH198,Roasted Vegetable Pesto,4,30,60,Cherry Tomatoes,Market,handful,4.0,1
+HH198,Roasted Vegetable Pesto,4,30,60,Onion (Red),Market,large,1.0,0
+HH198,Roasted Vegetable Pesto,4,30,60,Beetroots,Market,large,3.0,0
+HH198,Roasted Vegetable Pesto,4,30,60,Salad Leaves,Market,handful,4.0,0
+HH198,Roasted Vegetable Pesto,4,30,60,Quinoa,Zero-waste,g,250.0,0
+HH198,Roasted Vegetable Pesto,4,30,60,Brazil Nuts,Zero-waste,medium,12.0,0
+HH198,Roasted Vegetable Pesto,4,30,60,Garlic,Market,medium,2.0,0
+HH198,Roasted Vegetable Pesto,4,30,60,Basil,Carrefour,handful,3.0,0
+HH198,Roasted Vegetable Pesto,4,30,60,Lemon Juice,Market,tbsp,4.0,0
+EO001,Eat Out,1,0,0,Banana Leaves,Asian Shop,piece,1.0,0
+DE002,Sesame Aubergine Noodles,4,15,10,Garlic,Market,medium,8.0,0
+DE002,Sesame Aubergine Noodles,4,15,10,Noodles (Buckwheat),Carrefour,"",4.0,0
+DE002,Sesame Aubergine Noodles,4,15,10,Broccoli,Market,medium,1.0,0
+DE002,Sesame Aubergine Noodles,4,15,10,Mushrooms (Small),Carrefour,"",12.0,0
+DE002,Sesame Aubergine Noodles,4,15,10,Spring Onion / Chives,Market,handful,2.0,0
+DE002,Sesame Aubergine Noodles,4,15,10,Lemon,Market,medium,1.0,0
+DE002,Sesame Aubergine Noodles,4,15,10,Sesame Seeds,Zero-waste,g,10.0,0
+DE002,Sesame Aubergine Noodles,4,15,10,Sesame Oil,Carrefour,tbsp,1.0,0
+DE002,Sesame Aubergine Noodles,4,15,10,Cashew Nuts,Zero-waste,g,50.0,0
+DE002,Sesame Aubergine Noodles,4,15,10,Brinjal,Market,medium,1.0,0
+DE003,Sundried Tomato Pasta,4,15,10,Pasta (Fusilli),Carrefour,g,400.0,0
+DE003,Sundried Tomato Pasta,4,15,10,Tomatoes (Sun Dried),Carrefour,g,100.0,0
+DE003,Sundried Tomato Pasta,4,15,10,Almonds,Zero-waste,g,100.0,0
+DE003,Sundried Tomato Pasta,4,15,10,Tomato Puree,Carrefour,tbsp,2.0,0
+DE003,Sundried Tomato Pasta,4,15,10,Garlic,Market,medium,2.0,0
+DE003,Sundried Tomato Pasta,4,15,10,Almond Milk,Carrefour,"ml",310.0,0
+DE003,Sundried Tomato Pasta,4,15,10,Vinegar (Balsamic),Carrefour,"tbsp",1.0,0
+XX006,Dummy 6,4,30,60,Almonds,Zero-waste,g,1.0,0
+XX006,Dummy 6,4,30,60,Almond Butter,Carrefour,g,1.0,0
+DE001,Quinoa Tomato Pesto Salad,4,35,10,Quinoa,Zero-waste,g,200.0,0
+DE001,Quinoa Tomato Pesto Salad,4,35,10,Cherry Tomatoes,Market,g,200.0,0
+DE001,Quinoa Tomato Pesto Salad,4,35,10,Chickpeas,Carrefour,g,400.0,0
+DE001,Quinoa Tomato Pesto Salad,4,35,10,Onion (Red),Market,medium,1.0,0
+DE001,Quinoa Tomato Pesto Salad,4,35,10,Spring Onion / Chives,Market,medium,2.0,0
+DE001,Quinoa Tomato Pesto Salad,4,35,10,Lemon,Market,medium,1.5,0
+DE001,Quinoa Tomato Pesto Salad,4,35,10,Garlic,Market,medium,1.0,0
+DE001,Quinoa Tomato Pesto Salad,4,35,10,Almonds,Zero-waste,g,125.0,0
+DE001,Quinoa Tomato Pesto Salad,4,35,10,Basil,Carrefour,g,60.0,0
+DE001,Quinoa Tomato Pesto Salad,4,35,10,Rocket,Carrefour,handful,2.0,0
+HH170,Chicken Adobo,4,10,30,Chicken (Thigh),Carrefour,"",4.0,0
+HH170,Chicken Adobo,4,10,30,Garlic,Market,"",5.0,0
+HH170,Chicken Adobo,4,10,30,Bone Broth,Carrefour,ml,800.0,0
+HH170,Chicken Adobo,4,10,30,Vinegar (Apple Cider),Carrefour,tbsp,3.5,0
+EG081,Salsa Verde Pasta,4,15,15,Pasta (Fusilli),Carrefour,g,300.0,0
+EG081,Salsa Verde Pasta,4,15,15,Zuchinni,Market,large,4.0,0
+EG081,Salsa Verde Pasta,4,15,15,Rocket,Carrefour,handful,2.0,1
+EG081,Salsa Verde Pasta,4,15,15,Capers,Carrefour,handful,2.0,0
+EG081,Salsa Verde Pasta,4,15,15,Garlic,Market,medium,4.0,0
+EG081,Salsa Verde Pasta,4,15,15,Basil,Carrefour,"handful",1.0,0
+EG081,Salsa Verde Pasta,4,15,15,"Olives (Black, Pitted)",Carrefour,handful,1.0,0
+EG081,Salsa Verde Pasta,4,15,15,Lemon,Market,medium,0.5,0
+EG081,Salsa Verde Pasta,4,15,15,Feta Cheese,Carrefour,g,200.0,0
+EG081,Salsa Verde Pasta,4,15,15,Spinach (Baby),Market,handful,2.0,1
+EG112,Spinach Tomato Egg Curry,4,15,20,Spinach,Market,g,300.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,"Tomato (Diced, Tin)",Carrefour,g,400.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,Eggs,Carrefour,medium,4.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,Chickpeas,Carrefour,g,400.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,Onion (Red),Market,large,1.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,Garlic,Market,medium,5.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,Ginger,Market,medium,3.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,Chili,Market,medium,2.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,Bone Broth,Carrefour,"ml",300.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,Coriander,Market,handful,1.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,Lemon Juice,Market,tbsp,1.0,0
+EG112,Spinach Tomato Egg Curry,4,15,20,Yogurt,Carrefour,tbsp,8.0,0
+LM001,Ratatouille,4,15,30,Capsicum (Green),Market,medium,1.0,1
+LM001,Ratatouille,4,15,30,Capsicum (Red),Market,medium,1.0,1
+LM001,Ratatouille,4,15,30,Capsicum (Yellow),Market,medium,1.0,1
+LM001,Ratatouille,4,15,30,Zuchinni,Market,medium,2.0,0
+LM001,Ratatouille,4,15,30,Brinjal,Market,medium,2.0,0
+LM001,Ratatouille,4,15,30,Tomatoes,Market,medium,2.0,0
+LM001,Ratatouille,4,15,30,Tuna (Canned),Carrefour,g,200.0,2
+BP002,Yoghurt Chicken Curry,4,20,40,Onion (Red),Market,medium,1.0,0
+BP002,Yoghurt Chicken Curry,4,20,40,Garlic,Market,medium,3.0,0
+BP002,Yoghurt Chicken Curry,4,20,40,Ginger,Market,medium,1.5,0
+BP002,Yoghurt Chicken Curry,4,20,40,Coriander,Market,handful,2.0,0
+BP002,Yoghurt Chicken Curry,4,20,40,Yogurt,Carrefour,cup,0.5,0
+BP002,Yoghurt Chicken Curry,4,20,40,Tomatoes,Market,medium,2.0,0
+BP002,Yoghurt Chicken Curry,4,20,40,Chicken (Thigh),Carrefour,medium,4.0,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Chickpeas,Carrefour,g,1200.0,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Maple Syrup,Carrefour,tbsp,1.5,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Turnip,Market,g,150.0,1
+EG187,Shawarma Spiced Chickpeas,4,20,20,Carrots,Market,g,150.0,1
+EG187,Shawarma Spiced Chickpeas,4,20,20,Butterbeans,Carrefour,"g",400.0,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Garlic,Market,medium,2.0,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Tahini,Carrefour,tbsp,4.0,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Lemon,Market,medium,2.0,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Onion (Red),Market,small,1.0,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Tomatoes,Market,g,300.0,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Cucumber,Market,medium,1.0,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Cabbage (Red),Market,handful,2.0,2
+EG187,Shawarma Spiced Chickpeas,4,20,20,Lettuce,Market,handful,2.0,2
+EG187,Shawarma Spiced Chickpeas,4,20,20,Parsley,Market,handful,1.0,0
+EG187,Shawarma Spiced Chickpeas,4,20,20,Mint,Market,handful,1.0,0
+GS238,Butterbean Greek Salad,4,15,0,Butterbeans,Carrefour,"g",800.0,0
+GS238,Butterbean Greek Salad,4,15,0,Onion (Red),Market,large,1.0,0
+GS238,Butterbean Greek Salad,4,15,0,Capsicum (Red),Market,large,2.0,0
+GS238,Butterbean Greek Salad,4,15,0,Cucumber,Market,large,1.0,0
+GS238,Butterbean Greek Salad,4,15,0,Cherry Tomatoes,Market,g,250.0,1
+GS238,Butterbean Greek Salad,4,15,0,Tomatoes,Market,g,250.0,1
+GS238,Butterbean Greek Salad,4,15,0,"Olives (Black, Pitted)",Carrefour,handful,1.0,0
+GS238,Butterbean Greek Salad,4,15,0,Parsley,Market,handful,3.0,0
+GS238,Butterbean Greek Salad,4,15,0,Feta Cheese,Carrefour,g,300.0,0
+GS238,Butterbean Greek Salad,4,15,0,Vinegar (Apple Cider),Carrefour,"tbsp",4.0,0
+GS238,Butterbean Greek Salad,4,15,0,Garlic,Market,medium,2.0,0
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Onion (Red),Market,large,1.0,0
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Garlic,Market,medium,4.0,0
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Ginger,Market,medium,1.0,0
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Spinach,Market,handful,1.0,0
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Noodles (Yellow),Asian Shop,medium,4.0,0
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Chicken (Fillet),Carrefour,g,400.0,0
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Chickpeas,Carrefour,g,400.0,0
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Coconut Cream,Carrefour,g,800.0,0
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Coriander,Market,handful,1.0,1
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Basil,Carrefour,"handful",1.0,1
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Mint,Market,handful,1.0,1
+EG084,Turmeric Coconut Chicken Noodles,4,20,20,Lemon,Market,medium,1.0,0
+GS182,Nicoise Mackarel Salad,2,25,15,Green Beans,Market,g,250.0,0
+GS182,Nicoise Mackarel Salad,2,25,15,Eggs,Carrefour,medium,3.0,0
+GS182,Nicoise Mackarel Salad,2,25,15,Cherry Tomatoes,Market,handful,1.0,0
+GS182,Nicoise Mackarel Salad,2,25,15,Onion (Red),Market,medium,0.5,0
+GS182,Nicoise Mackarel Salad,2,25,15,"Olives (Black, Pitted)",Carrefour,handful,1.0,0
+GS182,Nicoise Mackarel Salad,2,25,15,Capers,Carrefour,handful,1.0,1
+GS182,Nicoise Mackarel Salad,2,25,15,Mackerel (Canned),Carrefour,g,200.0,0
+GS182,Nicoise Mackarel Salad,2,25,15,Lettuce,Market,small,1.0,0
+GS182,Nicoise Mackarel Salad,2,25,15,Carrots,Market,large,1.0,0
+GS182,Nicoise Mackarel Salad,2,25,15,Potatoes,Market,large,2.0,0
+EG144,Sausage & Beans Bake,6,30,30,Sausage,Carrefour,g,500.0,0
+EG144,Sausage & Beans Bake,6,30,30,Butterbeans,Carrefour,"g",800.0,0
+EG144,Sausage & Beans Bake,6,30,30,Black Beans,Carrefour,"g",400.0,0
+EG144,Sausage & Beans Bake,6,30,30,Onion (Red),Market,large,1.0,0
+EG144,Sausage & Beans Bake,6,30,30,Cherry Tomatoes,Market,g,250.0,0
+EG144,Sausage & Beans Bake,6,30,30,Lemon,Market,medium,1.0,0
+EG144,Sausage & Beans Bake,6,30,30,"Olives (Black, Pitted)",Carrefour,handful,1.0,0
+EG144,Sausage & Beans Bake,6,30,30,Cabbage,Market,g,300.0,0
+EG144,Sausage & Beans Bake,6,30,30,Rosemary,Market,medium,3.0,0
+EG144,Sausage & Beans Bake,6,30,30,Maple Syrup,Carrefour,tsp,2.0,0
+EG144,Sausage & Beans Bake,6,30,30,Vinegar (Apple Cider),Carrefour,"tbsp",1.0,0
+EG144,Sausage & Beans Bake,6,30,30,Garlic,Market,medium,2.0,0
+EG144,Sausage & Beans Bake,6,30,30,Walnuts,Zero-waste,handful,1.0,0
+EG144,Sausage & Beans Bake,6,30,30,Zuchinni,Market,medium,2.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Mushrooms (Porcini),Carrefour,medium,1.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Mushrooms (Small),Carrefour,g,400.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Onion (White),Market,medium,2.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Celery,Market,medium,3.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Garlic,Market,medium,4.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Quinoa,Zero-waste,g,250.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Vinegar (Apple Cider),Carrefour,"tbsp",1.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Bone Broth,Carrefour,"ml",700.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Feta Cheese,Carrefour,g,125.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Parsley,Market,handful,1.0,0
+HH206,Mushroom Stilton Quinoa Risotto,4,15,30,Lemon Juice,Market,tbsp,1.0,0
+DE004,Smoky Black Bean Stew,4,10,20,Black Beans,Carrefour,"g",800.0,0
+DE004,Smoky Black Bean Stew,4,10,20,"Tomato (Diced, Tin)",Carrefour,g,400.0,0
+DE004,Smoky Black Bean Stew,4,10,20,Onion (Red),Market,medium,1.0,0
+DE004,Smoky Black Bean Stew,4,10,20,Garlic,Market,medium,2.0,0
+DE004,Smoky Black Bean Stew,4,10,20,Tomato Puree,Carrefour,tbsp,1.0,0
+DE004,Smoky Black Bean Stew,4,10,20,Almond Butter,Carrefour,tbsp,1.0,0
+DE004,Smoky Black Bean Stew,4,10,20,Lime,Market,medium,1.0,0
+GS230,Lentil Bake,6,20,70,Butter,Carrefour,tbsp,4.0,0
+GS230,Lentil Bake,6,20,70,Onion (White),Market,medium,2.0,0
+GS230,Lentil Bake,6,20,70,Garlic,Market,medium,3.0,0
+GS230,Lentil Bake,6,20,70,Celery,Market,medium,2.0,0
+GS230,Lentil Bake,6,20,70,Lentils (Red),Market,g,250.0,0
+GS230,Lentil Bake,6,20,70,Bone Broth,Carrefour,"ml",500.0,0
+GS230,Lentil Bake,6,20,70,Carrots,Market,medium,2.0,0
+GS230,Lentil Bake,6,20,70,Zuchinni,Market,medium,1.0,0
+GS230,Lentil Bake,6,20,70,Cheese (Cheddar),Carrefour,"g",200.0,0
+GS230,Lentil Bake,6,20,70,Eggs,Carrefour,medium,2.0,1
+GS230,Lentil Bake,6,20,70,Tomatoes,Market,medium,2.0,0
+BP003,Sindhi Beef Curry,4,15,480,Beef (Cut),Market,g,500.0,0
+BP003,Sindhi Beef Curry,4,15,480,Onion (Red),Market,medium,2.0,0
+BP003,Sindhi Beef Curry,4,15,480,Tomatoes,Market,medium,4.0,1
+BP003,Sindhi Beef Curry,4,15,480,"Tomato (Diced, Tin)",Carrefour,g,400.0,1
+BP003,Sindhi Beef Curry,4,15,480,Bone Broth,Carrefour,"ml",100.0,0
+GS207,Smoky Apple Pulled Pork,4,20,480,Pork (Shoulder),Carrefour,g,500.0,0
+GS207,Smoky Apple Pulled Pork,4,20,480,Apple,Market,large,3.0,0
+GS207,Smoky Apple Pulled Pork,4,20,480,Vinegar (Apple Cider),Carrefour,"tbsp",4.0,0
+GS207,Smoky Apple Pulled Pork,4,20,480,Garlic,Market,medium,3.0,0
+GS242,Mediterranean Cauli Rice,4,30,15,Cauliflowers,Market,large,2.0,0
+GS242,Mediterranean Cauli Rice,4,30,15,Onion (Red),Market,medium,1.0,0
+GS242,Mediterranean Cauli Rice,4,30,15,Garlic,Market,medium,6.0,0
+GS242,Mediterranean Cauli Rice,4,30,15,Chickpeas,Carrefour,g,400.0,0
+GS242,Mediterranean Cauli Rice,4,30,15,Coriander,Market,handful,2.0,0
+GS242,Mediterranean Cauli Rice,4,30,15,Feta Cheese,Carrefour,g,200.0,0
+GS242,Mediterranean Cauli Rice,4,30,15,Tahini,Carrefour,tbsp,2.0,0
+GS242,Mediterranean Cauli Rice,4,30,15,Lemon Juice,Market,tbsp,2.0,0
+SF001,Moroccan Pumpkin Soup,6,15,75,Pumpkin (Butternut),Market,g,950.0,0
+SF001,Moroccan Pumpkin Soup,6,15,75,Carrots,Market,g,600.0,0
+SF001,Moroccan Pumpkin Soup,6,15,75,Onion (Red),Market,large,1.0,0
+SF001,Moroccan Pumpkin Soup,6,15,75,Bone Broth,Carrefour,"ml",1200.0,0
+SF001,Moroccan Pumpkin Soup,6,15,75,Lime,Market,medium,1.0,0
+SF001,Moroccan Pumpkin Soup,6,15,75,Chickpeas,Carrefour,g,400.0,0
+SF001,Moroccan Pumpkin Soup,6,15,75,Chicken (Fillet),Carrefour,g,400.0,1
+SF001,Moroccan Pumpkin Soup,6,15,75,Yogurt,Carrefour,tbsp,6.0,2
+BP001,Pork Vindaloo,8,15,60,Shallots,Market,medium,8.0,0
+BP001,Pork Vindaloo,8,15,60,Ginger,Market,medium,1.5,0
+BP001,Pork Vindaloo,8,15,60,Garlic,Market,medium,6.0,0
+BP001,Pork Vindaloo,8,15,60,Onion (Red),Market,large,1.0,0
+BP001,Pork Vindaloo,8,15,60,Tomatoes,Market,large,2.0,0
+BP001,Pork Vindaloo,8,15,60,Potatoes,Market,medium,5.0,0
+BP001,Pork Vindaloo,8,15,60,Pork (Shoulder),Carrefour,g,1000.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Chicken (Minced),Carrefour,g,250.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Tomato Puree,Carrefour,tbsp,2.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Bone Broth,Carrefour,cup,2.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Tomatoes,Market,medium,1.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Capsicum (Red),Market,small,1.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Capsicum (Green),Market,small,1.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Coriander,Market,handful,1.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Garlic,Market,medium,2.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Vinegar (Apple Cider),Carrefour,tsp,1.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Onion (Red),Market,medium,3.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Lime,Market,small,1.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Quinoa,Zero-waste,g,240.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Black Beans,Carrefour,"g",400.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,"Tomato (Diced, Tin)",Carrefour,g,400.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Corn (Canned),Carrefour,g,200.0,0
+BP004,Quinoa Burrito Bowl,6,15,240,Chili (Green),Market,medium,1.0,0
+BP005,Minced Pork w Potato & Carrot,4,15,20,Pork (Minced),Carrefour,g,100.0,0
+BP005,Minced Pork w Potato & Carrot,4,15,20,Potatoes,Market,g,200.0,0
+BP005,Minced Pork w Potato & Carrot,4,15,20,Carrots,Market,g,100.0,0
+BP005,Minced Pork w Potato & Carrot,4,15,20,Onion (Red),Market,g,100.0,0
+BP006,Lamb Curry Stew,6,30,510,Onion (Red),Market,medium,3.0,0
+BP006,Lamb Curry Stew,6,30,510,Garlic,Market,medium,6.0,0
+BP006,Lamb Curry Stew,6,30,510,Ginger,Market,medium,1.0,0
+BP006,Lamb Curry Stew,6,30,510,Chili (Green),Market,medium,4.0,0
+BP006,Lamb Curry Stew,6,30,510,Lamb,Carrefour,g,500.0,0
+BP006,Lamb Curry Stew,6,30,510,Sweet Potatoes,Market,large,2.0,0
+BP006,Lamb Curry Stew,6,30,510,"Tomatoes (Whole, Tin)",Carrefour,g,400.0,0
+BP006,Lamb Curry Stew,6,30,510,Chickpeas,Carrefour,g,400.0,0
+BP006,Lamb Curry Stew,6,30,510,Frozen Peas,Carrefour,g,120.0,0
+BP006,Lamb Curry Stew,6,30,510,Spinach,Market,handful,2.0,0
+BP007,Tomato Feta Pasta Salad,4,20,10,Pasta (Fusilli),Carrefour,g,250.0,0
+BP007,Tomato Feta Pasta Salad,4,20,10,Tomatoes,Market,g,500.0,0
+BP007,Tomato Feta Pasta Salad,4,20,10,Tomatoes (Sun Dried),Carrefour,medium,11.0,0
+BP007,Tomato Feta Pasta Salad,4,20,10,Feta Cheese,Carrefour,g,200.0,0
+BP007,Tomato Feta Pasta Salad,4,20,10,"Olives (Black, Pitted)",Carrefour,handful,3.0,0
+BP007,Tomato Feta Pasta Salad,4,20,10,Garlic,Market,medium,1.0,0
+BP007,Tomato Feta Pasta Salad,4,20,10,Capers,Carrefour,handful,1.0,0
+BP007,Tomato Feta Pasta Salad,4,20,10,Parsley,Market,handful,1.0,0
+BP008,Mee Goreng,4,15,15,Garlic,Market,medium,4.0,0
+BP008,Mee Goreng,4,15,15,Shallots,Market,medium,12.0,0
+BP008,Mee Goreng,4,15,15,Chicken (Fillet),Carrefour,g,100.0,0
+BP008,Mee Goreng,4,15,15,Noodles (Yellow),Asian Shop,g,400.0,0
+BP008,Mee Goreng,4,15,15,Eggs,Carrefour,medium,4.0,0
+BP008,Mee Goreng,4,15,15,Beansprouts,Asian Shop,handful,4.0,0
+BP008,Mee Goreng,4,15,15,Lime,Market,small,1.0,0
+GS050,Huevos Rancheros,2,30,30,Spinach,Market,handful,4.0,0
+GS050,Huevos Rancheros,2,30,30,Eggs,Carrefour,medium,4.0,0
+GS050,Huevos Rancheros,2,30,30,Coriander,Market,handful,2.0,0
+GS050,Huevos Rancheros,2,30,30,Onion (Red),Market,large,1.0,0
+GS050,Huevos Rancheros,2,30,30,Capsicum (Red),Market,medium,2.0,0
+GS050,Huevos Rancheros,2,30,30,Garlic,Market,medium,2.0,0
+GS050,Huevos Rancheros,2,30,30,"Tomatoes (Whole, Tin)",Carrefour,g,800.0,1
+GS050,Huevos Rancheros,2,30,30,Tomatoes,Market,g,800.0,1
+GS050,Huevos Rancheros,2,30,30,Avocados,Market,medium,1.0,0
+GS050,Huevos Rancheros,2,30,30,Lime,Market,medium,1.0,0
+GS050,Huevos Rancheros,2,30,30,Spring Onion / Chives,Market,medium,2.0,0
+SC088,Sausage Tagliatelle,4,30,480,Chorizo,Carrefour,medium,8.0,0
+SC088,Sausage Tagliatelle,4,30,480,Mushrooms (Small),Carrefour,g,150.0,0
+SC088,Sausage Tagliatelle,4,30,480,"Tomato (Diced, Tin)",Carrefour,g,400.0,0
+SC088,Sausage Tagliatelle,4,30,480,Pasta (Spaghetti),Carrefour,g,250.0,0
+SC088,Sausage Tagliatelle,4,30,480,Onion (Red),Market,medium,1.0,0
+SC088,Sausage Tagliatelle,4,30,480,Garlic,Market,"",2.0,0
+SC088,Sausage Tagliatelle,4,30,480,Bone Broth,Carrefour,"ml",150.0,0
+SC088,Sausage Tagliatelle,4,30,480,Basil,Carrefour,"handful",1.0,0
+EG142,Coconut Chicken Adobo,4,15,45,Chicken (Thigh),Carrefour,medium,4.0,0
+EG142,Coconut Chicken Adobo,4,15,45,Garlic,Market,medium,5.0,0
+EG142,Coconut Chicken Adobo,4,15,45,Coconut Cream,Carrefour,g,200.0,0
+EG142,Coconut Chicken Adobo,4,15,45,Vinegar (Apple Cider),Carrefour,"tbsp",4.0,0
+EG142,Coconut Chicken Adobo,4,15,45,Nuoc Nam Sauce,Asian Shop,tsp,1.0,0
+EG142,Coconut Chicken Adobo,4,15,45,Ginger,Market,medium,1.0,0
+EG142,Coconut Chicken Adobo,4,15,45,Green Beans,Market,g,300.0,0
+EG142,Coconut Chicken Adobo,4,15,45,Spring Onion / Chives,Market,medium,2.0,0
+GG188,Smoky Roast Chicken,6,15,90,Chicken (Whole),Carrefour,large,1.0,0
+GG188,Smoky Roast Chicken,6,15,90,Lime,Market,medium,1.0,0
+GG188,Smoky Roast Chicken,6,15,90,Sweet Potatoes,Market,medium,5.0,0
+GG188,Smoky Roast Chicken,6,15,90,Garlic,Market,medium,4.0,0
+BP023,No Admin,3,10,60,Green Beans,Market,medium,1.0,0
+BP023,No Admin,3,10,60,Frozen Peas,Carrefour,medium,1.0,0
+BP023,No Admin,3,10,60,Chicken (Thigh),Carrefour,medium,1.0,0
+BP023,No Admin,3,10,60,Coconut Cream,Carrefour,medium,1.0,0
