@@ -6,8 +6,8 @@ Application on [Python-Dash-Framework](https://dash.plotly.com/)
 
 ### Screenshots
 
-![Screenshot 1](../master/documentation/mp1.PNG "Meal Planner Screenshot")
+![Screenshot 1](../master/documentation/mp1.PNG?raw=true "Meal Planner Screenshot")
 
-![Screenshot 2](../master/documentation/mp2.PNG "Meal Planner Screenshot")
+![Screenshot 2](../master/documentation/mp2.PNG?raw=true "Meal Planner Screenshot")
 
-![Screenshot 3](../master/documentation/rv1.PNG "Recipe View Screenshot")
+![Screenshot 3](../master/documentation/rv1.PNG?raw=true "Recipe View Screenshot")
