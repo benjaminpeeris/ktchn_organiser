@@ -6,6 +6,11 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 
 mp_dashboard_layout = html.Div([
-    html.H3('Meal Planning Dashboard'),
-    html.Div('Under Construction')
+    dbc.Row([
+        dbc.Col([
+            html.H3('Meal Planning Dashboard'),
+            html.Div('Under Construction')
+        ])
+    ]),
+    dbc.Row([dbc.Col([html.Div('Meh', id='meal_chart')])])
 ])

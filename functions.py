@@ -1,9 +1,11 @@
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
-from data import recipes_db
+from data import recipes_db, recipes_full
+import dash
 
 # TODAY = datetime.date
+
 
 def get_startdate(weekoffset=0, fmt_as_code=False):
     day_offset = 5 - datetime.today().weekday()
@@ -12,6 +14,7 @@ def get_startdate(weekoffset=0, fmt_as_code=False):
     if fmt_as_code:
         return start_date.strftime("%Y%m%d")
     return start_date.strftime("%d-%m-%Y")
+
 
 # filter values in a df field.
 def dd_options(field_name, df, date_fmt=False, sort_by_field=None):
@@ -33,20 +36,14 @@ def dd_range_options(start, end, step=1):
 
 
 # filter table -- to modify this to remove the error catching. Just let the DF's go to zero.
-def dynamic_filter(df, return_errors=False, **kwargs):
+def dynamic_filter(df, **kwargs):
     fn_df = df.copy()
-    err_msgs = []
     for key in kwargs:
-        # to ignore if filter reduces dataset to below zero i.e. revert to original dataset
-        tmp = fn_df.copy()
-        fn_df = fn_df.loc[fn_df[key] == kwargs[key]]
-        if fn_df.shape[0] == 0:
-            fn_df = tmp
-            if kwargs[key] is not None:
-                print("Selection of {} = {} is ignored based on other selections. ".format(key, kwargs[key]))
-                err_msgs.append("Selection of {} = {} is ignored based on other selections. ".format(key, kwargs[key]))
-    if return_errors:
-        return fn_df, err_msgs
+        if kwargs[key] is not None and kwargs[key] != []:
+            if type(kwargs[key]) is list:
+                fn_df = fn_df.loc[fn_df[key].isin(kwargs[key])]
+            else:
+                fn_df = fn_df.loc[fn_df[key] == kwargs[key]]
     return fn_df
 
 
@@ -61,8 +58,30 @@ def valid_rec(book, page, name, servings, prep_time, cook_time):
         return False
     # 2. test whether code exists already
     rec_id = get_rec_id(book, page)
-    if rec_id in list(recipes_db['RecipeCode'].unique()):
+    if rec_id in list(recipes_db()['RecipeCode'].unique()):
         print("Recipe Code Exists!")
         return False
     print("Recipe Valid!")
     return True
+
+
+def dash_context():
+    ctx = dash.callback_context
+    return ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered else None
+
+
+def get_recipe_info(rec_name):
+    # see Sandbox for details.
+    rs = recipes_full()
+    rs = rs[rs['Recipe'] == rec_name]
+    rs_v = {
+        'Book': rs['RecipeCode'].values[0][0:2],
+        'Page': rs['RecipeCode'].values[0][2:5],
+        'Svgs': rs['Servings'].values[0],
+        'PpTm': rs['PrepTimeMins'].values[0],
+        'CkTm': rs['CookTimeMins'].values[0],
+        'Tags': [t for t in rs['Tags'].unique() if t is not np.nan],
+        'Mths': [m for m in rs['Months'].unique() if m is not np.nan],
+        'Data': rs[['Ingredient', 'Units', 'Quantity', 'Sub Group']] #.to_dict('records')
+    }
+    return rs_v
