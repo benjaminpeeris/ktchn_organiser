@@ -5,39 +5,21 @@ import dash_bootstrap_components as dbc
 import dash_table
 
 from functions import dd_range_options, dd_options
-from data import recipes_db, phdf_rec_ingr_tbl
+from data import recipes_db, phdf_rec_ingr_tbl, ingredients_db, SEASONS_LIST, MTH_LIST, TAG_LIST, BOOK_LIST
 
-BOOK_LIST = {
-    'HH': 'HH Art of Eating Well',
-    'GS': 'GS Good and Simple',
-    'EG': 'EG Eat Green',
-    'GG': 'GG Get the Glow',
-    'LM': 'LM Custom Recipes',
-    'BP': 'BP Custom Recipes'
-}
 
 UNITS_LIST = ['g', 'ml', 'medium', 'small', 'large', 'tbsp', 'tsp']
 
-MTH_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-SEASONS_LIST = ['All', 'Spring', 'Summer', 'Autumn', 'Winter']
-
-TAG_LIST = [
-    'Indian',
-    'Vegetarian',
-    'Slow Cooked',
-    'Cocotte-Friendly',
-    'Entree',
-    'Brunch',
-    'Quick'
-]
 
 recipe_editor_layout = html.Div([
     # header row
     dbc.Row(
         dbc.Col([
             html.H3('Recipe Editor'),
-            dcc.Dropdown(id='recipe_select', placeholder='Existing Recipe'),
-            dcc.Input(id='r_name_input', placeholder='Recipe Name', autoComplete="off", size='200', type="text")
+            dcc.Dropdown(id='recipe_editor_select', placeholder='Select Recipe (WIP)',
+                         options=[{'label': r['RecipeCode']+' '+r['Recipe'], 'value': r['Recipe']}
+                                  for r in recipes_db()[['RecipeCode', 'Recipe']].drop_duplicates().sort_values(by='RecipeCode').to_dict("records")]),
+            dbc.Input(id='r_name_input', placeholder='Recipe Name', autoComplete="off", type="text")
         ]), no_gutters=True),
     # recipe info row 1
     dbc.Row([
@@ -46,16 +28,20 @@ recipe_editor_layout = html.Div([
                          options=[{'label': name, 'value': code} for code, name in BOOK_LIST.items()]),
         ]),
         dbc.Col([
-            dcc.Dropdown(id='r_page_select', placeholder='Page/Idx', options=dd_range_options(1,400)),
+            dbc.Input(id='r_page_select', placeholder='Page/Idx', type='number')
+            # dcc.Dropdown(id='r_page_select', placeholder='Page/Idx', options=dd_range_options(1,400)),
         ]),
         dbc.Col([
-            dcc.Dropdown(id='r_servings_select', placeholder='Servings', options=dd_range_options(1, 8)),
+            dbc.Input(id='r_servings_select', placeholder='Servings', type='number')
+            # dcc.Dropdown(id='r_servings_select', placeholder='Servings', options=dd_range_options(1, 8)),
         ]),
         dbc.Col([
-            dcc.Dropdown(id='r_preptime_select', placeholder='Prep Time', options=dd_range_options(5,60,5)),
+            dbc.Input(id='r_preptime_select', placeholder='Prep Time', type='number')
+            # dcc.Dropdown(id='r_preptime_select', placeholder='Prep Time', options=dd_range_options(5,60,5)),
         ]),
         dbc.Col([
-            dcc.Dropdown(id='r_cooktime_select', placeholder='Cook Time', options=dd_range_options(15,480,15)),
+            dbc.Input(id='r_cooktime_select', placeholder='Cook Time', type='number')
+            # dcc.Dropdown(id='r_cooktime_select', placeholder='Cook Time', options=dd_range_options(15,480,15)),
         ])
     ], no_gutters=True),
     # recipe info row 2
@@ -84,7 +70,7 @@ recipe_editor_layout = html.Div([
         dbc.Col([
             html.Hr(),
             dcc.Dropdown(id='recipe_ingr_select', placeholder='Select Ingredients...',
-                         options=dd_options('Ingredient', recipes_db), multi=True),
+                         options=dd_options('Name', ingredients_db), multi=True),
             html.Div([
                 html.Br(),
                 dash_table.DataTable(

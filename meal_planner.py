@@ -6,7 +6,7 @@ import dash_table
 
 from dash.dependencies import Input, Output
 
-from data import recipes_db, day_map, phdf_shopping_list
+from data import recipes_db, day_map, phdf_shopping_list, TAG_LIST, MTH_LIST
 from functions import dd_options, get_startdate
 
 meal_plan_tbl_hdr = [
@@ -44,20 +44,38 @@ meal_planner_layout = html.Div([
                 value=get_startdate(0, fmt_as_code=True),
                 clearable=False
             ),
-            html.Hr()
+            html.Hr(),
+            html.Label("Select meals for this week"),
         ])),
     # meals selection
+    dbc.Row([
+        dbc.Col([
+            dcc.Dropdown(id='ingr_filter', options=dd_options('Ingredient', recipes_db()),
+                         multi=True, placeholder='Recipe Ingredient(s)')
+        ]),
+        dbc.Col([
+            dcc.Dropdown(id='month_filter', options=[{'label': optn, 'value': optn} for optn in MTH_LIST],
+                         multi=True, placeholder='Month(s)')
+        ]),
+        dbc.Col([
+            dcc.Dropdown(id='tag_filter', options=[{'label': optn, 'value': optn} for optn in TAG_LIST],
+                         multi=True, placeholder='Tag(s)')
+        ])
+    ], no_gutters=True),
     dbc.Row(
         dbc.Col([
-            html.Label("Select meals for this week"),
             dcc.Dropdown(
                 id='recipe_select',
-                options=dd_options('Recipe', recipes_db),
+                options=dd_options('Recipe', recipes_db()),
                 multi=True
-            )
+            ),
+            html.Div(id='cook_time_chart_div')
         ])),
     # meal plan table
     dbc.Table(meal_plan_tbl_hdr + meal_plan_tbl_body, bordered=False),
+    # manual save button
+    dbc.Button("Manual Save", id='manual_save_button', block=True, color="primary"),
+    html.Hr(),
     # shopping list table
     dbc.Row(dbc.Col([
         dash_table.DataTable(
