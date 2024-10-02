@@ -3,8 +3,15 @@ import numpy as np
 from datetime import datetime, timedelta
 from data import recipes_db, recipes_full
 import dash
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from tabulate import tabulate
+
+from creds import GMAIL_CREDS
 
 # TODAY = datetime.date
+FULL_REC_OVERWRITE_MODE = False
 
 
 def get_startdate(weekoffset=0, fmt_as_code=False):
@@ -51,18 +58,29 @@ def get_rec_id(bk_cd, pg):
     return bk_cd + str(pg).zfill(3)
 
 
-def valid_rec(book, page, name, servings, prep_time, cook_time):
-    # 1. test whether all values filled
+def input_rec_status(book, page, name, servings, prep_time, cook_time):
+    # 1. test whether all values filled: if not all necessary values are filled, return "no_save mode" i.e. 0
     if book is None or page is None or name is None or servings is None or prep_time is None or cook_time is None:
         print("Missing some necessary fields!")
-        return False
+        return 0
     # 2. test whether code exists already
+    #   2a. if recipe exists & name is identical to old name, return "overwrite mode" i.e. 1
+    #   2b. if recipe exists & name is not identical to old name, return "no_save mode" i.e. 0
+    #   2c. if recipe exists & name is not identical to old name
+    #       BUT FULL_REC_OVERWRITE_MODE is active, return "overwrite mode" i.e. 1
     rec_id = get_rec_id(book, page)
     if rec_id in list(recipes_db()['RecipeCode'].unique()):
-        print("Recipe Code Exists!")
-        return False
-    print("Recipe Valid!")
-    return True
+        df = recipes_db()[['RecipeCode', 'Recipe']]
+        cur_rec_name = df.loc[df['RecipeCode'] == rec_id].drop_duplicates(ignore_index=True)['Recipe'][0]
+        print("Recipe Code Exists...")
+        if name == cur_rec_name or FULL_REC_OVERWRITE_MODE:
+            print("-> Allow Overwrite of {} (overwrite mode = {})!".format(cur_rec_name, FULL_REC_OVERWRITE_MODE))
+            return 1
+        else:
+            print("-> Overwrite blocked because of mismatching name!")
+            return 0
+    print("New (Valid) Recipe Identified!")
+    return 2
 
 
 def dash_context():
@@ -75,6 +93,8 @@ def get_recipe_info(rec_name):
     rs = recipes_full()
     rs = rs[rs['Recipe'] == rec_name]
     rs_v = {
+        'Name': rs['Recipe'].values[0],
+        'Code': rs['RecipeCode'].values[0],
         'Book': rs['RecipeCode'].values[0][0:2],
         'Page': rs['RecipeCode'].values[0][2:5],
         'Svgs': rs['Servings'].values[0],
@@ -82,6 +102,62 @@ def get_recipe_info(rec_name):
         'CkTm': rs['CookTimeMins'].values[0],
         'Tags': [t for t in rs['Tags'].unique() if t is not np.nan],
         'Mths': [m for m in rs['Months'].unique() if m is not np.nan],
-        'Data': rs[['Ingredient', 'Units', 'Quantity', 'Sub Group']] #.to_dict('records')
+        'Data': rs[['Ingredient', 'Units', 'Quantity', 'Sub Group']].drop_duplicates()  #.to_dict('records')
     }
     return rs_v
+
+
+def df_remove_id(df, rec_code):
+    return df.drop(df[df['RecipeCode'] == rec_code].index)
+
+
+def send_df(df, codes, addn_notes, user):
+    gmail_user = GMAIL_CREDS['ACCT']
+    gmail_password = GMAIL_CREDS['PWD']
+
+    # Create message container - the correct MIME type is multipart/alternative.
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = "Meal Plan - {}".format(datetime.date(datetime.now()))
+    msg['From'] = gmail_user
+    msg['To'] = user
+
+    text = "Hi! Meal Plan for the week!"
+    html = """
+        <html>
+        <head>
+            <style>
+                table, th, td {{
+                    border: 2px solid black;
+                    border-collapse: collapse;
+                    border-color: #140A45;
+                    }}
+            </style>
+        </head>
+        <body>
+            {}
+            <hr>
+            {}
+            <hr>
+            <p>{}<p>
+        </body>
+        </html>
+        """.format(tabulate(df, headers='keys', tablefmt='html', showindex=False),
+                   tabulate(codes, headers='keys', tablefmt='html', showindex=False),
+                   addn_notes)
+    # Record the MIME types of both parts - text/plain and text/html.
+    intro_text = MIMEText(text, 'plain')
+    table_df = MIMEText(html, 'html')
+
+    msg.attach(intro_text)
+    msg.attach(table_df)
+
+    # print(msg.as_string())
+    try:
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server.ehlo()
+        server.login(gmail_user, gmail_password)
+        server.sendmail(msg['From'], msg['To'], msg.as_string())
+        server.close()
+        print("email sent!")
+    except:
+        print('Something went wrong...')

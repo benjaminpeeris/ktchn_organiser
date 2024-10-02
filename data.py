@@ -1,9 +1,15 @@
 import pandas as pd
 import math
 pd.options.mode.chained_assignment = None  # default='warn'
-# import sqlalchemy
-# import pyodbc
+import sqlalchemy
+import pyodbc
+import urllib
+import pymysql
 
+from sql_db_params import user_id, pwd, server_name, db_name
+
+MYSQLengine = sqlalchemy.create_engine('mysql+pymysql://{}:{}@{}/{}'.format(user_id, pwd, server_name, db_name)
+                                       , pool_recycle=3600)
 
 ingredients_db = pd.read_csv('data/ingredients.csv')  # hard coded (unchanging)
 

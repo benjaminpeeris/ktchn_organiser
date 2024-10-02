@@ -16,7 +16,7 @@ recipe_editor_layout = html.Div([
     dbc.Row(
         dbc.Col([
             html.H3('Recipe Editor'),
-            dcc.Dropdown(id='recipe_editor_select', placeholder='Select Recipe (WIP)',
+            dcc.Dropdown(id='recipe_editor_select', placeholder='Select Recipe',
                          options=[{'label': r['RecipeCode']+' '+r['Recipe'], 'value': r['Recipe']}
                                   for r in recipes_db()[['RecipeCode', 'Recipe']].drop_duplicates().sort_values(by='RecipeCode').to_dict("records")]),
             dbc.Input(id='r_name_input', placeholder='Recipe Name', autoComplete="off", type="text")
@@ -46,12 +46,6 @@ recipe_editor_layout = html.Div([
     ], no_gutters=True),
     # recipe info row 2
     dbc.Row([
-        dbc.Col([
-            dcc.Dropdown(id='r_seasons_select', placeholder='Seasons',
-                         options=[{'label': optn, 'value': optn} for optn in SEASONS_LIST
-                                  ],
-                         multi=False),
-        ]),
         dbc.Col([
             dcc.Dropdown(id='r_months_select', placeholder='Months',
                          options=[{'label': optn, 'value': optn} for optn in MTH_LIST
@@ -110,3 +104,12 @@ recipe_editor_layout = html.Div([
 
 ])
 
+"""
+(2022.01.15 : removed season selection because it is not as important as month select)
+dbc.Col([
+            dcc.Dropdown(id='r_seasons_select', placeholder='Seasons',
+                         options=[{'label': optn, 'value': optn} for optn in SEASONS_LIST
+                                  ],
+                         multi=False),
+        ]),
+"""

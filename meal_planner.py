@@ -6,8 +6,8 @@ import dash_table
 
 from dash.dependencies import Input, Output
 
-from data import recipes_db, day_map, phdf_shopping_list, TAG_LIST, MTH_LIST
-from functions import dd_options, get_startdate
+from data import recipes_db, day_map, phdf_shopping_list, TAG_LIST, MTH_LIST, recipes_full
+from functions import dd_options, get_startdate, dynamic_filter
 
 meal_plan_tbl_hdr = [
     html.Thead(html.Tr([
@@ -60,6 +60,9 @@ meal_planner_layout = html.Div([
         dbc.Col([
             dcc.Dropdown(id='tag_filter', options=[{'label': optn, 'value': optn} for optn in TAG_LIST],
                          multi=True, placeholder='Tag(s)')
+        ]),
+        dbc.Col([
+            dbc.Button("Import", id='gsheet_import_btn', block=True, color="primary")
         ])
     ], no_gutters=True),
     dbc.Row(
@@ -73,6 +76,9 @@ meal_planner_layout = html.Div([
         ])),
     # meal plan table
     dbc.Table(meal_plan_tbl_hdr + meal_plan_tbl_body, bordered=False),
+    html.Hr(),
+    dbc.Textarea(id="add_remarks", placeholder="Add notes for the meal plan..."),
+    html.Hr(),
     # manual save button
     dbc.Button("Manual Save", id='manual_save_button', block=True, color="primary"),
     html.Hr(),
@@ -84,6 +90,7 @@ meal_planner_layout = html.Div([
                     [{'id': p, 'name': p, 'type': 'numeric'} for p in phdf_shopping_list.columns]
                 ),
                 data=phdf_shopping_list.to_dict('records'),
+                sort_action='native',
                 editable=False,
                 row_deletable=True,
             ),

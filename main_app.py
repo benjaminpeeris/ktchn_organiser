@@ -11,13 +11,14 @@ import plotly.express as px
 from meal_planner import meal_planner_layout
 from recipe_editor import recipe_editor_layout
 from meal_plan_dashboard import mp_dashboard_layout
-from data import recipes_db, recipes_full, phdf_rec_ingr_tbl, ingredients_db, meal_plan, season_map
-from functions import get_rec_id, valid_rec, dd_options, dynamic_filter, dash_context, get_recipe_info
+from data import recipes_db, recipes_full, phdf_rec_ingr_tbl, ingredients_db, meal_plan, season_map, MYSQLengine
+from functions import get_rec_id, input_rec_status, dd_options, \
+    dynamic_filter, dash_context, get_recipe_info, df_remove_id, send_df
 
 NO_OF_PERSONS = 2
 REQD_FILL_PCT = 1  # all required to be filled for saving
 
-EXCL_REC = {'Eat Out', 'Dummy1', 'Dummy2'}
+EXCL_REC = {'Eat Out', 'Dummy1', 'Dummy2', 'Dummy3', 'Dummy4'}
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.config['suppress_callback_exceptions'] = True
@@ -74,6 +75,7 @@ def update_options(ingr_list, mth_list, tag_list):
               Output('thu_dl','value'), Output('thu_db','value'),
               Output('fri_ll','value'), Output('fri_lb','value'),
               Output('fri_dl','value'), Output('fri_db','value'),
+              Output('gsheet_import_btn', 'disabled'),
               Input('week_select', 'value'))
 def update_existing_recipe(weekdate):
     df = meal_plan(weekdate)
@@ -81,7 +83,8 @@ def update_existing_recipe(weekdate):
         print("No data found for", weekdate)
         return [], None, None, None, None, None, None, None, None, \
                None, None, None, None, None, None, None, None, \
-               None, None, None, None, None, None, None, None, None, None, None, None
+               None, None, None, None, None, None, None, None, None, None, None, None, \
+               False
     else:
         print("Data found for", weekdate)
         r_list = [i for i in df['Recipe'].unique()]
@@ -99,7 +102,8 @@ def update_existing_recipe(weekdate):
                r[12], r[13], r[14], r[15], \
                r[16], r[17], r[18], r[19], \
                r[20], r[21], r[22], r[23], \
-               r[24], r[25], r[26], r[27]
+               r[24], r[25], r[26], r[27], \
+               True
 
 
 @app.callback(Output('sat_ll','options'), Output('sat_lb','options'),
@@ -143,6 +147,7 @@ def update_week_recipe_list(recipes_selected):
                      },
                      color_discrete_map={'PrepTimeMins': 'orangered', 'CookTimeMins': 'lightsalmon'}
                      )
+        fig.update_xaxes(range=[0, 90])
         div = dcc.Graph(
             id='cook_time_graph',
             figure=fig
@@ -210,9 +215,11 @@ def shopping_list_update(a1, b1, c1, d1,
         week_meals_new = sl_store.reset_index()[['Recipe']]
         week_meals_old = meal_plan(weekdate).reset_index()[['Recipe']]
         if not(week_meals_new.equals(week_meals_old)):
-            print("Save Week")
-            print(sl_store.head())
-            sl_store.to_csv('data/sl_store.txt', mode='a', header=False)  # dev
+            print("Saving Week...")
+            # print(sl_store.head())
+            sl_store.to_csv('data/sl_store.txt', mode='a', header=False)
+            #sl_store.reset_index().rename(columns={'index':'id'})\
+                #.to_sql("meal_plan", con=MYSQLengine, if_exists='append', index=False)
 
     return shopping_list.to_dict('records')
 
@@ -220,33 +227,94 @@ def shopping_list_update(a1, b1, c1, d1,
 @app.callback(Output('copied_alert', 'is_open'),
               Input('shopping_list_copy_btn', 'n_clicks'),
               [State('shopping_list_table', 'data'),
-               State('shopping_list_copy_btn', 'n_clicks')],
+               State('shopping_list_copy_btn', 'n_clicks'),
+               State('sat_ll','value'), State('sat_lb','value'),
+               State('sat_dl','value'), State('sat_db','value'),
+               State('sun_ll','value'), State('sun_lb','value'),
+               State('sun_dl','value'), State('sun_db','value'),
+               State('mon_ll','value'), State('mon_lb','value'),
+               State('mon_dl','value'), State('mon_db','value'),
+               State('tue_ll','value'), State('tue_lb','value'),
+               State('tue_dl','value'), State('tue_db','value'),
+               State('wed_ll','value'), State('wed_lb','value'),
+               State('wed_dl','value'), State('wed_db','value'),
+               State('thu_ll','value'), State('thu_lb','value'),
+               State('thu_dl','value'), State('thu_db','value'),
+               State('fri_ll','value'), State('fri_lb','value'),
+               State('fri_dl','value'), State('fri_db','value'),
+               State('add_remarks', 'value')
+               ],
               prevent_initial_call=True)
-def copy_shopping_list(n, data, is_open):
+def copy_shopping_list(n, data, is_open,
+                       a1, b1, c1, d1,
+                       a2, b2, c2, d2,
+                       a3, b3, c3, d3,
+                       a4, b4, c4, d4,
+                       a5, b5, c5, d5,
+                       a6, b6, c6, d6,
+                       a7, b7, c7, d7,
+                       notes_added
+                       ):
     sldf_ = pd.DataFrame(data)
     sldf = sldf_[['Ingredient', 'Quantity', 'Units', 'Recipe']]
     sldf['Recipe'] = sldf['Recipe'].apply(lambda i: '('+i+')')
-    sldf.to_clipboard(sep='\t', index=False, header=False)
+    sldf['Units'] = sldf['Units'].apply(lambda i: i.replace("\r", ""))
+
+    # Store to Clipboard for export to keep
+    sldf.to_clipboard(excel=True, sep='\t', index=False, header=False)
+
+    # Send email with meal plan
+    meal_plan_df = pd.DataFrame({
+        'Day': ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+        'Lunch (L)': [a1, a2, a3, a4, a5, a6, a7],
+        'Lunch (B)': [b1, b2, b3, b4, b5, b6, b7],
+        'Dinner (L)': [c1, c2, c3, c4, c5, c6, c7],
+        'Dinner (B)': [d1, d2, d3, d4, d5, d6, d7]
+    })
+
+    # get recipe codes
+    codes = sldf_[['Recipe', 'RecipeCode']].drop_duplicates()
+    # print(codes)
+
+    send_df(meal_plan_df, codes, notes_added, 'laurenn.meghe@gmail.com')
+    send_df(meal_plan_df, codes, notes_added, 'bpeeris87@gmail.com')
+
+    # Update notion with meal plan
+
     return True
 
 
 # ---- RECIPE EDITOR ------!
-@app.callback(Output('r_months_select', 'value'), Input('r_seasons_select', 'value'))
-def mths_sel(season):
-    if season:
-        return season_map[season]
-    else:
-        return []
-
-
 @app.callback(Output('recipe_ingr_select', 'value'),
+              Output('r_book_select', 'value'),
+              Output('r_page_select', 'value'),
+              Output('r_servings_select', 'value'),
+              Output('r_preptime_select', 'value'),
+              Output('r_cooktime_select', 'value'),
+              Output('r_months_select', 'value'),
+              Output('r_name_input', 'value'),
+              Output('r_tag_select', 'value'),
               Input("recipe_editor_select", "value"))
 def add_recipe(rec_sel):
+    # populate recipe ingredient drop down based on recipe selected in recipe editor
     if rec_sel:
-        rec_info = get_recipe_info(rec_sel)['Data']
+        r = get_recipe_info(rec_sel)
+        name = r['Name']
+        code = r['Code']
+        book = r['Book']
+        page = int(r['Page'])
+        svgs = int(r['Svgs'])
+        prep = int(r['PpTm'])
+        cook = int(r['CkTm'])
+        mths = r['Mths']
+        tags = r['Tags']
+        rec_info = r['Data']
+
         item_values = [i['value'] for i in dd_options('Ingredient', rec_info)]
-        return item_values
-    return []
+        print(book, page, svgs, prep, cook, mths, tags, name, code) #DEV
+
+        return item_values, book, page, svgs, prep, cook, mths, name, tags
+    return [], None, None, None, None, None, None, None, None
 
 
 @app.callback(Output('recipe_ingr_table', 'data'),
@@ -255,23 +323,35 @@ def add_recipe(rec_sel):
               [State('recipe_ingr_table', 'data'),
                State('recipe_editor_select', 'value')])
 def populate_ingredients_tbl(items, tbl_upd_timestamp, original_data_tbl, rec_sel):
+    """
+    :param items: ingredients added manually via the drop down (trigger)
+    :param tbl_upd_timestamp: timestamp of data update (trigger only, ensuring updates to table are saved)
+    :param original_data_tbl: data which has already been input into the ingredient data table
+    :param rec_sel: selected recipe; optional (if present, we are in "edit" mode)
+    :return:
+
+    populates ingredients in recipe table, either from scratch or from a selected recipe (in "edit" mode)
+
+    """
     if not items:
         return phdf_rec_ingr_tbl.to_dict('records')
-
     # take in what has already been input (as long as it's still in the item list), and don't change the value
 
-    # items already in table
+    # items already in table aka odf
     odf = pd.DataFrame(original_data_tbl)
     odf = odf[odf['Ingredient'].isin(items)]
 
-    # new items (from recipes) U/C\
-    r = get_recipe_info(rec_sel)
-    print(r)
-    sdf = r['Data']
-    sdf = sdf[~sdf['Ingredient'].isin(odf['Ingredient'].unique())]  # exclude if already loaded.
+    # new items (from recipes) aka sdf U/C
+    if rec_sel:
+        r = get_recipe_info(rec_sel)
+        print(r)
+        sdf = r['Data']
+        sdf = sdf[~sdf['Ingredient'].isin(odf['Ingredient'].unique())]  # exclude if already loaded.
+    else:
+        sdf = pd.DataFrame(columns=phdf_rec_ingr_tbl.columns)  # empty data frame
 
-    exist_fams = set(odf['Ingredient'].unique())  # .union(set(sdf['Ingredient'].unique()))
-
+    # new items (manually input) aka ndf
+    exist_fams = set(odf['Ingredient'].unique()).union(set(sdf['Ingredient'].unique()))
     d = [{'Ingredient': item,
           'Quantity': 1,
           'Units': 'medium',
@@ -280,8 +360,7 @@ def populate_ingredients_tbl(items, tbl_upd_timestamp, original_data_tbl, rec_se
          for item in items if item not in exist_fams
          ]
     ndf = pd.DataFrame(d)
-    # df = pd.concat([odf, sdf, ndf])
-    df = pd.concat([odf, ndf])
+    df = pd.concat([odf, sdf, ndf])
     return df.to_dict('records')
 
 
@@ -299,9 +378,15 @@ def populate_ingredients_tbl(items, tbl_upd_timestamp, original_data_tbl, rec_se
               prevent_initial_call=True)
 def save_recipe(n, data, book, page, name, servings, prep_time, cook_time, months, tags):
     global recipes_db
-    if valid_rec(book, page, name, servings, prep_time, cook_time):
-        # main rec data
+    # status = {0: save_blocked, 1: overwrite_mode, 2: new_recipe}
+    status = input_rec_status(book, page, name, servings, prep_time, cook_time)
+    if status:
+        # load in original rec data
         recipes_db_l = recipes_db()
+        if status == 1:
+            print("delete existing rows for {}".format(get_rec_id(book, page)))
+            recipes_db_l = df_remove_id(recipes_db_l, get_rec_id(book, page))
+        # create mini-table for this recipe
         rec_df = pd.DataFrame(data)
         rec_df['RecipeCode'] = get_rec_id(book, page)
         rec_df['Recipe'] = name
@@ -310,30 +395,52 @@ def save_recipe(n, data, book, page, name, servings, prep_time, cook_time, month
         rec_df['CookTimeMins'] = cook_time
         rec_df = rec_df.merge(ingredients_db[['Name', 'Location']].rename(columns={'Name': 'Ingredient'}))
         print(recipes_db_l.shape)
+        # merge in data from old database
         recipes_db_l = pd.concat([recipes_db_l,rec_df])
         print(recipes_db_l.shape)
-        recipes_db_l.to_csv('data/recipes.csv', index=False)
-        # rec tags data
+        # store back the new dataframe
+        recipes_db_l.to_csv('data/recipes.csv', index=False)    # saving...
+
+        # rec tags data (repeat similar algorithm as above)
         if tags:
             tags_old = pd.read_csv('data/recipes_tags.csv')
+            if status == 1:
+                print("delete existing tags rows for {}".format(get_rec_id(book, page)))
+                tags_old = df_remove_id(tags_old, get_rec_id(book, page))
             tags_new = pd.DataFrame(data={
                 'RecipeCode': [get_rec_id(book, page)] * len(tags),
                 'Tags': tags
             })
             tags_df = pd.concat([tags_old, tags_new])
-            tags_df.to_csv('data/recipes_tags.csv', index=False)
-        # rec months data
+            tags_df.to_csv('data/recipes_tags.csv', index=False)    # saving...
+
+        # rec months data (repeat similar algorithm as above)
         if months:
             months_old = pd.read_csv('data/recipes_months.csv')
+            if status == 1:
+                print("delete existing months rows for {}".format(get_rec_id(book, page)))
+                months_old = df_remove_id(months_old, get_rec_id(book, page))
             months_new = pd.DataFrame(data={
                 'RecipeCode': [get_rec_id(book, page)] * len(months),
                 'Months': months
             })
             months_df = pd.concat([months_old, months_new])
-            months_df.to_csv('data/recipes_months.csv', index=False)
+            months_df.to_csv('data/recipes_months.csv', index=False)    # saving...
         return True
     return False
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
+
+
+"""
+(2022.01.15 : removed season selection because it is not as important as month select)
+@app.callback(Output('r_months_select', 'value'), 
+              Input('r_seasons_select', 'value'))
+def mths_sel(season):
+    if season:
+        return season_map[season]
+    else:
+        return []
+"""
