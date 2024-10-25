@@ -14,6 +14,7 @@ from meal_plan_dashboard import mp_dashboard_layout
 from data import recipes_db, recipes_full, phdf_rec_ingr_tbl, ingredients_db, meal_plan, season_map, MYSQLengine
 from functions import get_rec_id, input_rec_status, dd_options, \
     dynamic_filter, dash_context, get_recipe_info, df_remove_id, send_df
+from users import USERS
 
 NO_OF_PERSONS = 2
 REQD_FILL_PCT = 1  # all required to be filled for saving
@@ -276,8 +277,8 @@ def copy_shopping_list(n, data, is_open,
     codes = sldf_[['Recipe', 'RecipeCode']].drop_duplicates()
     # print(codes)
 
-    send_df(meal_plan_df, codes, notes_added, 'laurenn.meghe@gmail.com')
-    send_df(meal_plan_df, codes, notes_added, 'bpeeris87@gmail.com')
+    for user in USERS:
+        send_df(meal_plan_df, codes, notes_added, user)
 
     # Update notion with meal plan
 

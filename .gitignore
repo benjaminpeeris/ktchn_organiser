@@ -131,3 +131,4 @@ dmypy.json
 # Specific to this project
 creds.py
 sql_db_params.py
+users.py
