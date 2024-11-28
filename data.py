@@ -72,6 +72,36 @@ phdf_rec_ingr_tbl = pd.DataFrame(data={
     'Sub Group': [0]
 })
 
+open_ai_bootstrap = pd.DataFrame([
+    ["[{'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Sweet Potatoes', 'Location': 'Market', 'Units': 'large', 'Quantity': 4, 'Sub Group': 0}, {'Recipe': 'Tortilla', 'Meals': 4, 'RecipeCode': 'BP025', 'Servings': 4, 'PrepTimeMins': 5, 'CookTimeMins': 10, 'Ingredient': 'Salad Leaves', 'Location': 'Market', 'Units': 'medium', 'Quantity': 1, 'Sub Group': 0}, {'Recipe': 'Smoky Black Bean Stew', 'Meals': 4, 'RecipeCode': 'DE004', 'Servings': 4, 'PrepTimeMins': 10, 'CookTimeMins': 20, 'Ingredient': 'Onion (Red)', 'Location': 'Market', 'Units': 'medium', 'Quantity': 1, 'Sub Group': 0}, {'Recipe': 'Tortilla', 'Meals': 4, 'RecipeCode': 'BP025', 'Servings': 4, 'PrepTimeMins': 5, 'CookTimeMins': 10, 'Ingredient': 'Onion (Red)', 'Location': 'Market', 'Units': 'medium', 'Quantity': 1, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Lime', 'Location': 'Market', 'Units': 'medium', 'Quantity': 0.5, 'Sub Group': 0}, {'Recipe': 'Smoky Black Bean Stew', 'Meals': 4, 'RecipeCode': 'DE004', 'Servings': 4, 'PrepTimeMins': 10, 'CookTimeMins': 20, 'Ingredient': 'Lime', 'Location': 'Market', 'Units': 'medium', 'Quantity': 1, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Lemon', 'Location': 'Market', 'Units': 'medium', 'Quantity': 0.5, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Garlic', 'Location': 'Market', 'Units': 'medium', 'Quantity': 4, 'Sub Group': 0}, {'Recipe': 'Mac & Cheese', 'Meals': 6, 'RecipeCode': 'BP010', 'Servings': 6, 'PrepTimeMins': 30, 'CookTimeMins': 45, 'Ingredient': 'Garlic', 'Location': 'Market', 'Units': 'medium', 'Quantity': 1, 'Sub Group': 0}, {'Recipe': 'Smoky Black Bean Stew', 'Meals': 4, 'RecipeCode': 'DE004', 'Servings': 4, 'PrepTimeMins': 10, 'CookTimeMins': 20, 'Ingredient': 'Garlic', 'Location': 'Market', 'Units': 'medium', 'Quantity': 2, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Coriander', 'Location': 'Market', 'Units': 'medium', 'Quantity': 1, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Cherry Tomatoes', 'Location': 'Market', 'Units': 'medium', 'Quantity': 24, 'Sub Group': 0}, {'Recipe': 'Tortilla', 'Meals': 4, 'RecipeCode': 'BP025', 'Servings': 4, 'PrepTimeMins': 5, 'CookTimeMins': 10, 'Ingredient': 'Capsicum (Red)', 'Location': 'Market', 'Units': 'medium', 'Quantity': 2, 'Sub Group': 0}, {'Recipe': 'Mac & Cheese', 'Meals': 6, 'RecipeCode': 'BP010', 'Servings': 6, 'PrepTimeMins': 30, 'CookTimeMins': 45, 'Ingredient': 'Beef (Minced)', 'Location': 'Market', 'Units': 'g', 'Quantity': 500, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Avocados', 'Location': 'Market', 'Units': 'medium', 'Quantity': 2, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Yogurt', 'Location': 'Carrefour', 'Units': 'g', 'Quantity': 200, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Vinegar (Apple Cider)', 'Location': 'Carrefour', 'Units': 'tbsp', 'Quantity': 2, 'Sub Group': 0}, {'Recipe': 'Tortilla', 'Meals': 4, 'RecipeCode': 'BP025', 'Servings': 4, 'PrepTimeMins': 5, 'CookTimeMins': 10, 'Ingredient': 'Tortilla Pack', 'Location': 'Carrefour', 'Units': 'medium', 'Quantity': 1, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Tomatoes (Sun Dried)', 'Location': 'Carrefour', 'Units': 'g', 'Quantity': 50, 'Sub Group': 0}, {'Recipe': 'Mac & Cheese', 'Meals': 6, 'RecipeCode': 'BP010', 'Servings': 6, 'PrepTimeMins': 30, 'CookTimeMins': 45, 'Ingredient': 'Tomato Sauce', 'Location': 'Carrefour', 'Units': 'ml', 'Quantity': 400, 'Sub Group': 0}, {'Recipe': 'Smoky Black Bean Stew', 'Meals': 4, 'RecipeCode': 'DE004', 'Servings': 4, 'PrepTimeMins': 10, 'CookTimeMins': 20, 'Ingredient': 'Tomato Puree', 'Location': 'Carrefour', 'Units': 'tbsp', 'Quantity': 1, 'Sub Group': 0}, {'Recipe': 'Smoky Black Bean Stew', 'Meals': 4, 'RecipeCode': 'DE004', 'Servings': 4, 'PrepTimeMins': 10, 'CookTimeMins': 20, 'Ingredient': 'Tomato (Diced, Tin)', 'Location': 'Carrefour', 'Units': 'g', 'Quantity': 400, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Tahini', 'Location': 'Carrefour', 'Units': 'tbsp', 'Quantity': 1, 'Sub Group': 0}, {'Recipe': 'Mac & Cheese', 'Meals': 6, 'RecipeCode': 'BP010', 'Servings': 6, 'PrepTimeMins': 30, 'CookTimeMins': 45, 'Ingredient': 'Macaroni', 'Location': 'Carrefour', 'Units': 'g', 'Quantity': 250, 'Sub Group': 0}, {'Recipe': 'Tortilla', 'Meals': 4, 'RecipeCode': 'BP025', 'Servings': 4, 'PrepTimeMins': 5, 'CookTimeMins': 10, 'Ingredient': 'Chicken (Fillet)', 'Location': 'Carrefour', 'Units': 'g', 'Quantity': 500, 'Sub Group': 0}, {'Recipe': 'Mac & Cheese', 'Meals': 6, 'RecipeCode': 'BP010', 'Servings': 6, 'PrepTimeMins': 30, 'CookTimeMins': 45, 'Ingredient': 'Cheese (Cheddar)', 'Location': 'Carrefour', 'Units': 'g', 'Quantity': 150, 'Sub Group': 0}, {'Recipe': 'Loaded Sweet Potato Skins', 'Meals': 4, 'RecipeCode': 'DE008', 'Servings': 4, 'PrepTimeMins': 25, 'CookTimeMins': 60, 'Ingredient': 'Black Beans', 'Location': 'Carrefour', 'Units': 'g', 'Quantity': 800, 'Sub Group': 0}, {'Recipe': 'Smoky Black Bean Stew', 'Meals': 4, 'RecipeCode': 'DE004', 'Servings': 4, 'PrepTimeMins': 10, 'CookTimeMins': 20, 'Ingredient': 'Black Beans', 'Location': 'Carrefour', 'Units': 'g\r', 'Quantity': 800, 'Sub Group': 0}, {'Recipe': 'Smoky Black Bean Stew', 'Meals': 4, 'RecipeCode': 'DE004', 'Servings': 4, 'PrepTimeMins': 10, 'CookTimeMins': 20, 'Ingredient': 'Almond Butter', 'Location': 'Carrefour', 'Units': 'tbsp', 'Quantity': 1, 'Sub Group': 0}]",
+     """Sweet Potatoes 4 large (Loaded Sweet Potato Skins)
+Salad Leaves 1 medium (Tortilla)
+Onion (Red)	2 medium (Smoky Black Bean Stew / Tortilla)
+Lime 1.5 medium (Loaded Sweet Potato Skins / Smoky Black Bean Stew)
+Lemon 0.5 medium (Loaded Sweet Potato Skins)
+Garlic 7 medium (Loaded Sweet Potato Skins / Mac & Cheese / Smoky Black Bean Stew)
+Coriander 1 medium (Loaded Sweet Potato Skins)
+Cherry Tomatoes	24 medium (Loaded Sweet Potato Skins)
+Capsicum (Red) 2 medium (Tortilla)
+Beef (Minced) 500	g (Mac & Cheese)
+Avocados 2 medium (Loaded Sweet Potato Skins)
+Yogurt	200 g (Loaded Sweet Potato Skins)
+Vinegar (Apple Cider) 2 tbsp (Loaded Sweet Potato Skins)
+Tortilla Pack 1 medium (Tortilla)
+Tomatoes (Sun Dried) 50 g (Loaded Sweet Potato Skins)
+Tomato Sauce 400 ml	(Mac & Cheese)
+Tomato Puree 1 tbsp	(Smoky Black Bean Stew)
+Tomato (Diced, Tin)	400 g (Smoky Black Bean Stew)
+Tahini 1 tbsp (Loaded Sweet Potato Skins)
+Macaroni 250 g (Mac & Cheese)
+Chicken (Fillet) 500 g (Tortilla)
+Cheese (Cheddar) 150 g (Mac & Cheese)
+Black Beans	800 g (Loaded Sweet Potato Skins)
+Black Beans	800.0 g (Smoky Black Bean Stew)
+Almond Butter 1 tbsp (Smoky Black Bean Stew)
+     """]
+], columns=['input', 'output'])
+
 
 def meal_plan(week='all'):
     load = pd.read_csv('data/sl_store.txt').drop_duplicates()
@@ -99,3 +129,5 @@ def recipes_full():
     df = pd.merge(df, pd.read_csv('data/recipes_months.csv'), how='outer')
     df = df.dropna(subset=['Recipe'])
     return df
+
+

@@ -13,7 +13,7 @@ from recipe_editor import recipe_editor_layout
 from meal_plan_dashboard import mp_dashboard_layout
 from data import recipes_db, recipes_full, phdf_rec_ingr_tbl, ingredients_db, meal_plan, season_map, MYSQLengine
 from functions import get_rec_id, input_rec_status, dd_options, \
-    dynamic_filter, dash_context, get_recipe_info, df_remove_id, send_df
+    dynamic_filter, dash_context, get_recipe_info, df_remove_id, send_df, shopping_list_gen_ai
 from users import USERS
 
 NO_OF_PERSONS = 2
@@ -256,13 +256,12 @@ def copy_shopping_list(n, data, is_open,
                        a7, b7, c7, d7,
                        notes_added
                        ):
-    sldf_ = pd.DataFrame(data)
-    sldf = sldf_[['Ingredient', 'Quantity', 'Units', 'Recipe']]
-    sldf['Recipe'] = sldf['Recipe'].apply(lambda i: '('+i+')')
-    sldf['Units'] = sldf['Units'].apply(lambda i: i.replace("\r", ""))
 
-    # Store to Clipboard for export to keep
-    sldf.to_clipboard(excel=True, sep='\t', index=False, header=False)
+    # process data by aggregating data
+    sldf_ = pd.DataFrame(data)
+
+    # process data via shopping_list_gen_ai
+    shopping_list_gen_ai(data)
 
     # Send email with meal plan
     meal_plan_df = pd.DataFrame({

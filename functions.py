@@ -1,17 +1,23 @@
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
-from data import recipes_db, recipes_full
+from data import recipes_db, recipes_full, open_ai_bootstrap
 import dash
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from tabulate import tabulate
+#import openai
+from openai import OpenAI
+import pyperclip
 
-from creds import GMAIL_CREDS
+from creds import GMAIL_CREDS, MP_KEY
 
 # TODAY = datetime.date
 FULL_REC_OVERWRITE_MODE = False
+client = OpenAI(
+    api_key=MP_KEY
+)
 
 
 def get_startdate(weekoffset=0, fmt_as_code=False):
@@ -109,6 +115,70 @@ def get_recipe_info(rec_name):
 
 def df_remove_id(df, rec_code):
     return df.drop(df[df['RecipeCode'] == rec_code].index)
+
+
+def generateChatGPT(context, input, few_shots = pd.DataFrame(), debug = False):
+    # "role: system" is basically the context, you describe what the model is expected to do
+    messages = [
+        {
+            "role": "system",
+            "content": context
+        }
+    ]
+    # "few shots" examples are a good way to control the output on new data
+    # generally the more the better but also keep it low enough to not use too many tokens
+    for i, x in few_shots.iterrows():
+        messages += [
+            {
+                "role": "user",
+                "content": x.input
+            },
+            {
+                "role": "assistant",
+                "content": x.output
+            }
+        ]
+    # the actual
+    messages += [
+        {
+            "role": "user",
+            "content": str(input)
+        }
+    ]
+    if debug:
+        print(messages)
+    # refer to the documentation for more parameters to play with
+    response = client.chat.completions.create(
+        model = "gpt-4o-mini", # model selection, see possible models online
+        temperature = .1, # basically the randomness of the response
+        messages = messages
+    )
+    return response.choices[0].message.content.strip()
+
+
+def shopping_list_gen_ai(data):
+    # non-ai version
+    if MP_KEY == '' or MP_KEY is None:
+        sldf_ = pd.DataFrame(data)
+        sldf = sldf_[['Ingredient', 'Quantity', 'Units', 'Recipe']]
+        sldf['Recipe'] = sldf['Recipe'].apply(lambda i: '(' + i + ')')
+        sldf['Units'] = sldf['Units'].apply(lambda i: i.replace("\r", ""))
+        sldf.to_clipboard(excel=True, sep='\t', index=False, header=False)
+        return
+
+    # ai version
+    msg_to_save = generateChatGPT(
+        """You are an assistant that will take a raw data of ingredients, quantities, recipes, and other information, 
+        and consolidate it into a shopping list. Only return the shopping list in list form, including the recipe 
+        which needs it.
+        """,
+        data,
+        few_shots=open_ai_bootstrap
+    )
+    pyperclip.copy(msg_to_save)
+    print(data)
+    print(pyperclip.paste())
+    return
 
 
 def send_df(df, codes, addn_notes, user):
