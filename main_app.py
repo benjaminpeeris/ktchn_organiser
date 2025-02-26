@@ -79,6 +79,11 @@ def update_options(ingr_list, mth_list, tag_list):
               Output('gsheet_import_btn', 'disabled'),
               Input('week_select', 'value'))
 def update_existing_recipe(weekdate):
+    """
+    When User selects a Week, this function populates the Meal Plan;
+    (if there is saved data)
+    Note, it also updates the list of recipes that were saved
+    """
     df = meal_plan(weekdate)
     if df.shape[0] == 0:
         print("No data found for", weekdate)
@@ -125,7 +130,10 @@ def update_existing_recipe(weekdate):
               Input('recipe_select', 'value'),
               prevent_initial_call=True)
 def update_week_recipe_list(recipes_selected):
-
+    """
+    When a recipe is added to the plan, it is now available in the drop-down options
+    It also appears in the cook-time chart
+    """
     optns_list = [{'label': recipe, 'value': recipe} for recipe in recipes_selected]
 
     recipes_db_l = recipes_db()
@@ -193,6 +201,13 @@ def shopping_list_update(a1, b1, c1, d1,
                          a6, b6, c6, d6,
                          a7, b7, c7, d7,
                          n, weekdate):
+    """
+    Any time a recipe is input into the Meal Plan, the shopping list is updated
+    When the shopping list is completed (7*4 entries), there will be a manual saved to db
+        - Assuming there was an update
+    ** DEVT **
+        - Any time a recipe is input into the Supplementary Meals, the shopping list is updated
+    """
     meal_list = [a1, b1, c1, d1,
                  a2, b2, c2, d2,
                  a3, b3, c3, d3,
