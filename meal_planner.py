@@ -6,7 +6,7 @@ import dash_table
 
 from dash.dependencies import Input, Output
 
-from data import recipes_db, day_map, phdf_shopping_list, TAG_LIST, MTH_LIST, recipes_full
+from data import recipes_db, day_map, phdf_shopping_list, TAG_LIST, MTH_LIST, phdf_meal_summary, recipes_full
 from functions import dd_options, get_startdate, dynamic_filter
 
 meal_plan_tbl_hdr = [
@@ -75,14 +75,29 @@ meal_planner_layout = html.Div([
             html.Div(id='cook_time_chart_div')
         ])),
     # meal plan table
+    html.H6('Detailed Meal Plan'),
     dbc.Table(meal_plan_tbl_hdr + meal_plan_tbl_body, bordered=False),
     html.Hr(),
     dbc.Textarea(id="add_remarks", placeholder="Add notes for the meal plan..."),
+    html.Hr(),
+    html.H6('Weekly Meal Summary'),
+    dbc.Row(dbc.Col([
+        dash_table.DataTable(
+            id='meal_week_summary_table',
+            columns=(
+                [{'id': p, 'name': p, 'type': 'numeric', 'editable': p in ['Supplementary Meals']}
+                 for p in phdf_meal_summary.columns]
+            ),
+            data=phdf_meal_summary.to_dict('records'),
+        ),
+        dbc.Button("Generate Shopping List", id='shopping_list_gen_btn', block=True, color="primary")
+    ])),
     html.Hr(),
     # manual save button
     dbc.Button("Manual Save", id='manual_save_button', block=True, color="primary"),
     html.Hr(),
     # shopping list table
+
     dbc.Row(dbc.Col([
         dash_table.DataTable(
                 id='shopping_list_table',

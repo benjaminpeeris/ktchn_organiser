@@ -16,6 +16,7 @@ from functions import get_rec_id, input_rec_status, dd_options, \
     dynamic_filter, dash_context, get_recipe_info, df_remove_id, send_df, shopping_list_gen_ai
 from users import USERS
 
+
 NO_OF_PERSONS = 2
 REQD_FILL_PCT = 1  # all required to be filled for saving
 
@@ -175,7 +176,7 @@ def update_week_recipe_list(recipes_selected):
            # recipe_options
 
 
-@app.callback(Output('shopping_list_table', 'data'),
+@app.callback(Output('meal_week_summary_table', 'data'),
               [Input('sat_ll','value'), Input('sat_lb','value'),
                Input('sat_dl','value'), Input('sat_db','value'),
                Input('sun_ll','value'), Input('sun_lb','value'),
@@ -193,7 +194,7 @@ def update_week_recipe_list(recipes_selected):
                Input('manual_save_button', 'n_clicks')],
               State('week_select', 'value')
               )
-def shopping_list_update(a1, b1, c1, d1,
+def meal_summary_update(a1, b1, c1, d1,
                          a2, b2, c2, d2,
                          a3, b3, c3, d3,
                          a4, b4, c4, d4,
@@ -201,13 +202,6 @@ def shopping_list_update(a1, b1, c1, d1,
                          a6, b6, c6, d6,
                          a7, b7, c7, d7,
                          n, weekdate):
-    """
-    Any time a recipe is input into the Meal Plan, the shopping list is updated
-    When the shopping list is completed (7*4 entries), there will be a manual saved to db
-        - Assuming there was an update
-    ** DEVT **
-        - Any time a recipe is input into the Supplementary Meals, the shopping list is updated
-    """
     meal_list = [a1, b1, c1, d1,
                  a2, b2, c2, d2,
                  a3, b3, c3, d3,
@@ -215,29 +209,46 @@ def shopping_list_update(a1, b1, c1, d1,
                  a5, b5, c5, d5,
                  a6, b6, c6, d6,
                  a7, b7, c7, d7]
-    shopping_list_raw = pd.DataFrame(meal_list, columns=['Recipe'])
-    shopping_list = shopping_list_raw.dropna().groupby('Recipe').size().reset_index(name='Meals')
-    shopping_list = shopping_list.merge(recipes_db(), how='inner', left_on='Recipe', right_on='Recipe')
-    shopping_list['Quantity'] = shopping_list['Meals']*shopping_list['Quantity']/shopping_list['Servings']
-    shopping_list.sort_values(by=['Location','Ingredient'], ascending=False, inplace=True)
-    shopping_list = shopping_list[~shopping_list.Recipe.isin(EXCL_REC)]
+    week_summary_r = pd.DataFrame(meal_list, columns=['Recipe'])
+    week_summary = week_summary_r.groupby('Recipe').size().reset_index(name='Meals') \
+        .rename(columns={'Meals': 'Planned Meals'})
+    week_summary['Supplementary Meals'] = 0
+    # week_summary['Total Meals'] = week_summary['Planned Meals']
+    # print(week_summary)
 
-    # store data
-    shopping_list_raw['Week'] = str(weekdate)
-    shopping_list_raw['TS'] = dt.datetime.now().strftime('%Y%m%d%H%M%S')
-    sl_store = shopping_list_raw[~shopping_list_raw['Recipe'].isnull()]
+    # save the meal plan logic (previously was under shopping_list_update)
+    week_summary_r['Week'] = str(weekdate)
+    week_summary_r['TS'] = dt.datetime.now().strftime('%Y%m%d%H%M%S')
+    sl_store = week_summary_r[~week_summary_r['Recipe'].isnull()]
     if sl_store.shape[0] >= round((7 * 2 * NO_OF_PERSONS) * REQD_FILL_PCT) or dash_context() == 'manual_save_button':
         # check if there was an update...
         week_meals_new = sl_store.reset_index()[['Recipe']]
         week_meals_old = meal_plan(weekdate).reset_index()[['Recipe']]
-        if not(week_meals_new.equals(week_meals_old)):
+        if not (week_meals_new.equals(week_meals_old)):
             print("Saving Week...")
             # print(sl_store.head())
             sl_store.to_csv('data/sl_store.txt', mode='a', header=False)
-            #sl_store.reset_index().rename(columns={'index':'id'})\
-                #.to_sql("meal_plan", con=MYSQLengine, if_exists='append', index=False)
+            # sl_store.reset_index().rename(columns={'index':'id'})\
+            # .to_sql("meal_plan", con=MYSQLengine, if_exists='append', index=False)
 
+    return week_summary.to_dict('records')
+
+@app.callback(Output('shopping_list_table', 'data'),
+              Input('shopping_list_gen_btn', 'n_clicks'),
+              State('meal_week_summary_table','data')
+              )
+def shopping_list_update(n, data):
+    shopping_list_raw = pd.DataFrame(data)
+    shopping_list = shopping_list_raw.dropna()#.groupby('Recipe').size().reset_index(name='Total Meals')
+    shopping_list['Total Meals'] = shopping_list['Planned Meals'] + shopping_list['Supplementary Meals']
+    shopping_list = shopping_list.merge(recipes_db(), how='inner', left_on='Recipe', right_on='Recipe')
+    shopping_list['Quantity'] = shopping_list['Total Meals'] * shopping_list['Quantity'] / shopping_list['Servings']
+    shopping_list.sort_values(by=['Location', 'Ingredient'], ascending=False, inplace=True)
+    shopping_list = shopping_list[~shopping_list.Recipe.isin(EXCL_REC)]
+
+    shopping_list.to_clipboard() # test
     return shopping_list.to_dict('records')
+
 
 
 @app.callback(Output('copied_alert', 'is_open'),
@@ -458,4 +469,84 @@ def mths_sel(season):
         return season_map[season]
     else:
         return []
+
+@app.callback(Output('shopping_list_table', 'data'),
+              [Input('sat_ll','value'), Input('sat_lb','value'),
+               Input('sat_dl','value'), Input('sat_db','value'),
+               Input('sun_ll','value'), Input('sun_lb','value'),
+               Input('sun_dl','value'), Input('sun_db','value'),
+               Input('mon_ll','value'), Input('mon_lb','value'),
+               Input('mon_dl','value'), Input('mon_db','value'),
+               Input('tue_ll','value'), Input('tue_lb','value'),
+               Input('tue_dl','value'), Input('tue_db','value'),
+               Input('wed_ll','value'), Input('wed_lb','value'),
+               Input('wed_dl','value'), Input('wed_db','value'),
+               Input('thu_ll','value'), Input('thu_lb','value'),
+               Input('thu_dl','value'), Input('thu_db','value'),
+               Input('fri_ll','value'), Input('fri_lb','value'),
+               Input('fri_dl','value'), Input('fri_db','value'),
+               Input('manual_save_button', 'n_clicks')],
+              State('week_select', 'value')
+              )
+def shopping_list_update(a1, b1, c1, d1,
+                         a2, b2, c2, d2,
+                         a3, b3, c3, d3,
+                         a4, b4, c4, d4,
+                         a5, b5, c5, d5,
+                         a6, b6, c6, d6,
+                         a7, b7, c7, d7,
+                         n, weekdate):
+    #
+    #Any time a recipe is input into the Meal Plan, the shopping list is updated
+    #When the shopping list is completed (7*4 entries), there will be a manual saved to db
+    #    - Assuming there was an update
+    #** DEVT **
+    #    - Any time a recipe is input into the Supplementary Meals, the shopping list is updated
+    #
+    
+    meal_list = [a1, b1, c1, d1,
+                 a2, b2, c2, d2,
+                 a3, b3, c3, d3,
+                 a4, b4, c4, d4,
+                 a5, b5, c5, d5,
+                 a6, b6, c6, d6,
+                 a7, b7, c7, d7]
+    shopping_list_raw = pd.DataFrame(meal_list, columns=['Recipe'])
+    shopping_list = shopping_list_raw.dropna().groupby('Recipe').size().reset_index(name='Meals')
+    shopping_list = shopping_list.merge(recipes_db(), how='inner', left_on='Recipe', right_on='Recipe')
+    shopping_list['Quantity'] = shopping_list['Meals']*shopping_list['Quantity']/shopping_list['Servings']
+    shopping_list.sort_values(by=['Location','Ingredient'], ascending=False, inplace=True)
+    shopping_list = shopping_list[~shopping_list.Recipe.isin(EXCL_REC)]
+
+    # update for week_summary BP20250312
+    #week_summary_r = pd.DataFrame(meal_list, columns=['Recipe'])
+    #week_summary = week_summary_r.groupby('Recipe').size().reset_index(name='Meals')\
+    #    .rename(columns={'Meals' : 'WeekMeals'})
+    #week_summary['SuppMeals'] = 0
+    #week_summary['TotalMeals'] = week_summary['WeekMeals']
+    #print()
+    #print(week_summary)
+
+    # store data
+    shopping_list_raw['Week'] = str(weekdate)
+    shopping_list_raw['TS'] = dt.datetime.now().strftime('%Y%m%d%H%M%S')
+    sl_store = shopping_list_raw[~shopping_list_raw['Recipe'].isnull()]
+    if sl_store.shape[0] >= round((7 * 2 * NO_OF_PERSONS) * REQD_FILL_PCT) or dash_context() == 'manual_save_button':
+        # check if there was an update...
+        week_meals_new = sl_store.reset_index()[['Recipe']]
+        week_meals_old = meal_plan(weekdate).reset_index()[['Recipe']]
+        if not(week_meals_new.equals(week_meals_old)):
+            print("Saving Week...")
+            # print(sl_store.head())
+            sl_store.to_csv('data/sl_store.txt', mode='a', header=False)
+            #sl_store.reset_index().rename(columns={'index':'id'})\
+                #.to_sql("meal_plan", con=MYSQLengine, if_exists='append', index=False)
+
+    return shopping_list.to_dict('records')
+    #return week_summary.to_dict('records')
+
+
+
+
+
 """

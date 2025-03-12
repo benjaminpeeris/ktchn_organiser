@@ -65,6 +65,12 @@ phdf_shopping_list = pd.DataFrame(data={
     'Meals': [1, 1]
 })
 
+phdf_meal_summary = pd.DataFrame(data={
+    'Recipe': ['Dummy1', 'Dummy2'],
+    'Planned Meals': [1, 1],
+    'Supplementary Meals': [0, 0]
+})
+
 phdf_rec_ingr_tbl = pd.DataFrame(data={
     'Ingredient': ['ABCD'],
     'Quantity': [1.0],
