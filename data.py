@@ -1,17 +1,27 @@
 import pandas as pd
 import math
 pd.options.mode.chained_assignment = None  # default='warn'
-import sqlalchemy
+import sqlalchemy as sa
 import pyodbc
 import urllib
-import pymysql
+import psycopg2
+#import pymysql
 
 from sql_db_params import user_id, pwd, server_name, db_name
 
-MYSQLengine = sqlalchemy.create_engine('mysql+pymysql://{}:{}@{}/{}'.format(user_id, pwd, server_name, db_name)
-                                       , pool_recycle=3600)
+from creds import SQL_CREDS
+from etl_utils import DB_PGSQL
 
-ingredients_db = pd.read_csv('data/ingredients.csv')  # hard coded (unchanging)
+db = DB_PGSQL(SQL_CREDS, 'dbmp', 'prod', port=SQL_CREDS.port)
+
+#MYSQLengine = sqlalchemy.create_engine('mysql+pymysql://{}:{}@{}/{}'.format(user_id, pwd, server_name, db_name)
+#                                       , pool_recycle=3600)
+
+ingredients_db = db.read_sql("""
+    select * from dbmp.public.ingredients i
+    """) # hard coded (unchanging)
+
+#ingredients_db = pd.read_csv('data/ingredients.csv')  # hard coded (unchanging)
 
 MTH_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 SEASONS_LIST = ['All', 'Spring', 'Summer', 'Autumn', 'Winter']
@@ -127,13 +137,31 @@ def meal_plan(week='all'):
 
 # recipes_db = pd.read_csv('data/recipes.csv')  # needs to be dynamic
 def recipes_db():
-    return pd.read_csv('data/recipes.csv')
+    return db.read_sql("select * from dbmp.public.recipes r ")
+    # return pd.read_csv('data/recipes.csv')
 
 
 def recipes_full():
-    df = pd.merge(recipes_db(), pd.read_csv('data/recipes_tags.csv'), how='outer')
-    df = pd.merge(df, pd.read_csv('data/recipes_months.csv'), how='outer')
-    df = df.dropna(subset=['Recipe'])
+    query = """ 
+    select r.*, rt."Tags", rm."Months" from dbmp.public.recipes r 
+    left join dbmp.public.recipes_months rm on r."RecipeCode" = rm."RecipeCode"
+    left join dbmp.public.recipes_tags rt on r."RecipeCode" = rt."RecipeCode" 
+    where "Recipe" is not null 
+    """
+    # df = pd.merge(recipes_db(), pd.read_csv('data/recipes_tags.csv'), how='outer')
+    # df = pd.merge(df, pd.read_csv('data/recipes_months.csv'), how='outer')
+    # df = df.dropna(subset=['Recipe'])
+    df = db.read_sql(query)
+    # side note, ideally recipe full should not use data in this format as we are doing a expanding join;
+    # but I am not sure about the full process
     return df
+
+
+def recipe_tags():
+    return db.read_sql("select * from dbmp.public.recipes_tags rt")
+
+
+def recipe_months():
+    return db.read_sql("select * from dbmp.public.recipes_months rm")
 
 

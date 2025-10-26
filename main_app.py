@@ -11,7 +11,8 @@ import plotly.express as px
 from meal_planner import meal_planner_layout
 from recipe_editor import recipe_editor_layout
 from meal_plan_dashboard import mp_dashboard_layout
-from data import recipes_db, recipes_full, phdf_rec_ingr_tbl, ingredients_db, meal_plan, season_map, MYSQLengine
+from data import recipes_db, recipes_full, phdf_rec_ingr_tbl, ingredients_db, meal_plan, season_map, \
+    recipe_months, recipe_tags
 from functions import get_rec_id, input_rec_status, dd_options, \
     dynamic_filter, dash_context, get_recipe_info, df_remove_id, send_df, shopping_list_gen_ai
 from users import USERS
@@ -246,7 +247,7 @@ def shopping_list_update(n, data):
     shopping_list.sort_values(by=['Location', 'Ingredient'], ascending=False, inplace=True)
     shopping_list = shopping_list[~shopping_list.Recipe.isin(EXCL_REC)]
 
-    shopping_list.to_clipboard() # test
+    #shopping_list.to_clipboard() # test
     return shopping_list.to_dict('records')
 
 
@@ -425,11 +426,12 @@ def save_recipe(n, data, book, page, name, servings, prep_time, cook_time, month
         recipes_db_l = pd.concat([recipes_db_l,rec_df])
         print(recipes_db_l.shape)
         # store back the new dataframe
-        recipes_db_l.to_csv('data/recipes.csv', index=False)    # saving...
+        print("Note, saving to database has been deprecated from this app")
+        # recipes_db_l.to_csv('data/recipes.csv', index=False)    # saving...
 
         # rec tags data (repeat similar algorithm as above)
         if tags:
-            tags_old = pd.read_csv('data/recipes_tags.csv')
+            tags_old = recipe_tags() #pd.read_csv('data/recipes_tags.csv')
             if status == 1:
                 print("delete existing tags rows for {}".format(get_rec_id(book, page)))
                 tags_old = df_remove_id(tags_old, get_rec_id(book, page))
@@ -438,11 +440,12 @@ def save_recipe(n, data, book, page, name, servings, prep_time, cook_time, month
                 'Tags': tags
             })
             tags_df = pd.concat([tags_old, tags_new])
-            tags_df.to_csv('data/recipes_tags.csv', index=False)    # saving...
+            #tags_df.to_csv('data/recipes_tags.csv', index=False)    # saving...
+            print("Note, saving to database has been deprecated from this app")
 
         # rec months data (repeat similar algorithm as above)
         if months:
-            months_old = pd.read_csv('data/recipes_months.csv')
+            months_old = recipe_months() #pd.read_csv('data/recipes_months.csv')
             if status == 1:
                 print("delete existing months rows for {}".format(get_rec_id(book, page)))
                 months_old = df_remove_id(months_old, get_rec_id(book, page))
@@ -451,7 +454,8 @@ def save_recipe(n, data, book, page, name, servings, prep_time, cook_time, month
                 'Months': months
             })
             months_df = pd.concat([months_old, months_new])
-            months_df.to_csv('data/recipes_months.csv', index=False)    # saving...
+            #months_df.to_csv('data/recipes_months.csv', index=False)    # saving...
+            print("Note, saving to database has been deprecated from this app")
         return True
     return False
 
